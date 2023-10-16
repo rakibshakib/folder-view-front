@@ -16,6 +16,13 @@ function App() {
   const folderOpenIconHandler = (FolderNode: TreeNode): void => {
     toggleFolder(FolderNode?.id, folderData, setFolderData);
   };
+  const folderCreateCloseHandler = (
+    FolderNode: TreeNode,
+    type: string
+  ): void => {
+    console.log(type);
+    // toggleFolder(FolderNode?.id, folderData, setFolderData);
+  };
   return (
     <>
       <div>
@@ -23,6 +30,7 @@ function App() {
           <FolderNode
             folderData={folderData}
             folderOpenIconHandler={folderOpenIconHandler}
+            folderCreateCloseHandler={folderCreateCloseHandler}
           />
         </div>
       </div>

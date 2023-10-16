@@ -1,12 +1,15 @@
 import { FcFolder, FcOpenedFolder, FcPlus } from "react-icons/fc";
 import { TreeNode } from "../App";
+import { AiOutlineCloseCircle } from "react-icons/ai";
 
 const FolderNode = ({
   folderData,
   folderOpenIconHandler,
+  folderCreateCloseHandler,
 }: {
   folderData: TreeNode;
   folderOpenIconHandler: (node: TreeNode) => void;
+  folderCreateCloseHandler: (node: TreeNode, type: string) => void;
 }) => {
   console.log({ folderData });
   return (
@@ -19,8 +22,25 @@ const FolderNode = ({
           <p>{folderData?.isOpen ? <FcOpenedFolder /> : <FcFolder />}</p>
           <h4>{folderData?.name}</h4>
         </div>
-        <div>
-          <FcPlus />
+        <div className="iconContainer">
+          {folderData.id > 1 && (
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                folderCreateCloseHandler(folderData, "close");
+              }}
+            >
+              <AiOutlineCloseCircle />
+            </span>
+          )}
+          <span
+            onClick={(e) => {
+              e.stopPropagation();
+              folderCreateCloseHandler(folderData, "add");
+            }}
+          >
+            <FcPlus />
+          </span>
         </div>
       </div>
 
@@ -31,6 +51,7 @@ const FolderNode = ({
               key={index}
               folderData={childNode}
               folderOpenIconHandler={folderOpenIconHandler}
+              folderCreateCloseHandler={folderCreateCloseHandler}
             />
           ))}
         </div>
