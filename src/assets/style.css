@@ -1,0 +1,54 @@
+.container{
+    width: 400px;
+    border: 1px solid rgb(42, 42, 42);
+    padding: 5px 10px;
+    height: 100vh;
+}
+.parentRoot,
+.childRoots {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    height: 25px;
+    padding: 3px 5px;
+}
+.innrerContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 30px;
+    padding: 3px 0;
+}
+
+.parentRoot h4 ,
+.childRoots h4, p {
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.childRoots:hover{
+    background-color: rgb(236, 236, 236);
+    outline: 1px solid rgb(247, 247, 247);
+}
+.parentRoot{
+    /* position: absolute; */
+    background-color: white;
+    width: 200px;
+}
+.childRoots{
+    /* position: relative; */
+    top: 30px;
+    left: 28px;
+    width: 200px;
+    visibility: visible; /* Initial visibility state */
+    background-color: rgb(250, 250, 250);
+    outline: 1px solid rgb(247, 247, 247);
+    /* translate: all 0.5s ease-in-out; */
+    transition: transform 0.4s ease-in-out;
+    z-index: -1;
+}
+.hide{
+    visibility: hidden;
+    transform: translateY(-100%);
+}

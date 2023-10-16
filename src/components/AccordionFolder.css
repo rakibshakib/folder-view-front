@@ -1,0 +1,28 @@
+/* AccordionFolder.css */
+.folder {
+    cursor: pointer;
+    padding-left: 20px;
+    position: relative;
+    margin-bottom: 5px;
+  }
+  
+  .folder:before {
+    content: '\25B6'; /* Unicode for a right-pointing triangle (▶) */
+    position: absolute;
+    left: 0;
+    transition: transform 0.3s;
+  }
+  
+  .folder.open:before {
+    transform: rotate(90deg);
+  }
+  
+  .folder-content {
+    display: none;
+    margin-left: 20px;
+  }
+  
+  .folder.open + .folder-content {
+    display: block;
+  }
+  
