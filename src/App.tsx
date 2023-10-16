@@ -8,7 +8,7 @@ import FolderNode from "./components/FolderNode";
 export interface TreeNode {
   name: string;
   isOpen: boolean;
-  child?: TreeNode[];
+  child: TreeNode[] | [];
 }
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
     //   (prev: TreeNode): TreeNode => ({ ...prev, isOpen: !prev.isOpen })
     // );
   };
-  console.log({folderData})
+  console.log({ folderData });
   return (
     <>
       <div>
@@ -32,7 +32,7 @@ function App() {
               <FcPlus />
             </div>
           </div> */}
-          {folderData?.isOpen && <FolderNode folderData={folderData} />}
+          <FolderNode folderData={folderData} />
         </div>
       </div>
     </>

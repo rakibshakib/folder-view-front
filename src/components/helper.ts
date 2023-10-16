@@ -6,7 +6,7 @@ export const FolderDataSet: TreeNode = {
     child: [
       {
         name: 'Child 1',
-        isOpen: true,
+        isOpen: false,
         child: [
           {
             name: 'Child 1.1',
