@@ -103,3 +103,34 @@ export const deleteFolder = (
   setFolderData(updatedData);
   cb?.();
 };
+export const AddFolder = (
+  id: number,
+  folderName: string,
+  folderData: TreeNode,
+  setFolderData: (node: TreeNode) => void,
+  cb: () => void
+) => {
+  const newObject: TreeNode = {
+    name: folderName,
+    isOpen: false,
+    id: Date.now(),
+    child: [],
+  };
+  if (folderData.name === "Root") {
+    folderData.child.push(newObject);
+  } else {
+    const updateNode = (child: TreeNode) => {
+      const index = child?.child.findIndex((i) => i.id === id);
+      if (index === -1) {
+        child.child.forEach(updateNode);
+      } else {
+        child?.child[index].child.push(newObject);
+      }
+    };
+    const updatedData = { ...folderData };
+    updateNode(updatedData);
+    console.log(updatedData);
+    setFolderData(updatedData);
+  }
+  cb?.();
+};

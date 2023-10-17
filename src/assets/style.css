@@ -30,7 +30,7 @@
 
 .parentRoot h4,
 .childRoots h4,
-p {
+.childRoots p {
     font-size: 14px;
     margin-left: 10px;
 }
@@ -118,4 +118,15 @@ p {
 .modal-close-icon span:hover{
     color: red;
     cursor: pointer;
+}
+.modal .inputField{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    margin: 5px 0px;
+    outline: none;
+}
+.create-folder-container{
+    display: flex;
+    flex-direction: column;
 }

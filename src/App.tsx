@@ -1,6 +1,11 @@
 import { useState } from "react";
 import "./App.css";
-import { FolderDataSet, deleteFolder, toggleFolder } from "./components/helper";
+import {
+  AddFolder,
+  FolderDataSet,
+  deleteFolder,
+  toggleFolder,
+} from "./components/helper";
 import FolderNode from "./components/FolderNode";
 import ViewModal from "./components/Modal";
 
@@ -13,6 +18,7 @@ export interface TreeNode {
 
 function App() {
   const [folderData, setFolderData] = useState<TreeNode>({ ...FolderDataSet });
+  const [folderName, setFolderName] = useState<string>("");
   const [isCreateModalOpen, setIsCreateOpenModal] = useState<boolean>(false);
   const [isCloseModalOpen, setIsCloseOpenModal] = useState<boolean>(false);
   const [currentFolder, setCurrentFolder] = useState<TreeNode | object>();
@@ -41,15 +47,21 @@ function App() {
             folderCreateCloseHandler={folderCreateCloseHandler}
           />
         </div>
-        {/* <button onClick={() => setIsCreateOpenModal(!isCreateModalOpen)}>
-          Open Modal
-        </button> */}
-
         <div className="modal">
           {isCreateModalOpen && (
             <ViewModal
               OnOk={() => {
-                console.log(currentFolder);
+                AddFolder(
+                  (currentFolder as TreeNode).id,
+                  folderName,
+                  folderData,
+                  setFolderData,
+                  () => {
+                    setCurrentFolder({});
+                    setFolderName("");
+                    setIsCreateOpenModal(!isCreateModalOpen);
+                  }
+                );
               }}
               onCancel={() => {
                 setCurrentFolder({});
@@ -60,9 +72,17 @@ function App() {
               cancelText="Cancel"
               isOpen={isCreateModalOpen}
             >
-              <p>
-                Create New Folder in <b>{(currentFolder as TreeNode).name}</b>{" "}
-              </p>
+              <div className="create-folder-container">
+                <p>
+                  Create New Folder in <b>{(currentFolder as TreeNode).name}</b>{" "}
+                </p>
+                <input
+                  type="text"
+                  value={folderName}
+                  className="inputField"
+                  onChange={(e) => setFolderName(e.target.value)}
+                />
+              </div>
             </ViewModal>
           )}
         </div>
