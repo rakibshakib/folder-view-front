@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./App.css";
-import { FolderDataSet, toggleFolder } from "./components/helper";
+import { FolderDataSet, deleteFolder, toggleFolder } from "./components/helper";
 import FolderNode from "./components/FolderNode";
 import ViewModal from "./components/Modal";
 
@@ -13,7 +13,9 @@ export interface TreeNode {
 
 function App() {
   const [folderData, setFolderData] = useState<TreeNode>({ ...FolderDataSet });
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isCreateModalOpen, setIsCreateOpenModal] = useState<boolean>(false);
+  const [isCloseModalOpen, setIsCloseOpenModal] = useState<boolean>(false);
+  const [currentFolder, setCurrentFolder] = useState<TreeNode | object>();
   const folderOpenIconHandler = (FolderNode: TreeNode): void => {
     toggleFolder(FolderNode?.id, folderData, setFolderData);
   };
@@ -21,8 +23,12 @@ function App() {
     FolderNode: TreeNode,
     type: string
   ): void => {
-    console.log(type);
-    // toggleFolder(FolderNode?.id, folderData, setFolderData);
+    setCurrentFolder(FolderNode);
+    if (type === "add") {
+      setIsCreateOpenModal(!isCreateModalOpen);
+    } else {
+      setIsCloseOpenModal(!isCloseModalOpen);
+    }
   };
   return (
     <>
@@ -34,21 +40,51 @@ function App() {
             folderCreateCloseHandler={folderCreateCloseHandler}
           />
         </div>
-        <button onClick={() => setIsOpen(!isOpen)}>Open Modal</button>
+        {/* <button onClick={() => setIsCreateOpenModal(!isCreateModalOpen)}>
+          Open Modal
+        </button> */}
 
         <div className="modal">
-          {isOpen && (
+          {isCreateModalOpen && (
             <ViewModal
-              OnOk={() => console.log("ok")}
-              onCancel={() =>{
-                setIsOpen(!isOpen)
+              OnOk={() => {
+                console.log(currentFolder);
               }}
-              onclose={() => setIsOpen(!isOpen)}
+              onCancel={() => {
+                setCurrentFolder({});
+                setIsCreateOpenModal(!isCreateModalOpen);
+              }}
+              onclose={() => setIsCreateOpenModal(!isCreateModalOpen)}
+              okText="Create"
+              cancelText="Cancel"
+              isOpen={isCreateModalOpen}
+            >
+              <p>
+                Create New Folder in <b>{(currentFolder as TreeNode).name}</b>{" "}
+              </p>
+            </ViewModal>
+          )}
+        </div>
+        <div className="modal">
+          {isCloseModalOpen && (
+            <ViewModal
+              OnOk={() => {
+                console.log(currentFolder);
+                deleteFolder((currentFolder as TreeNode).id, folderData, setFolderData);
+              }}
+              onCancel={() => {
+                setCurrentFolder({});
+                setIsCloseOpenModal(!isCloseModalOpen);
+              }}
+              onclose={() => setIsCloseOpenModal(!isCloseModalOpen)}
               okText="Yes"
               cancelText="No"
-              isOpen={isOpen}
+              isOpen={isCloseModalOpen}
             >
-              <h1>Modal</h1>
+              <p>
+                Are You Sure Want to delete{" "}
+                <b>{(currentFolder as TreeNode).name}</b> folder ?{" "}
+              </p>
             </ViewModal>
           )}
         </div>

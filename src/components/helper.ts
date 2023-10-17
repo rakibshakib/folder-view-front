@@ -83,3 +83,22 @@ const closeNextAllChildNode = (child: TreeNode): void => {
     child.child.forEach(closeNextAllChildNode);
   }
 };
+
+export const deleteFolder = (
+  id: number,
+  folderData: TreeNode,
+  setFolderData: (node: TreeNode) => void
+) => {
+  // ** Recursive function to search for the node
+  const updateNode = (child: TreeNode) => {
+    if (child.id === id) {
+      console.log(child)
+    } else if (child.child) {
+      child.child.forEach(updateNode);
+    }
+  };
+
+  const updatedData = { ...folderData };
+  updateNode(updatedData);
+  setFolderData(updatedData);
+};
