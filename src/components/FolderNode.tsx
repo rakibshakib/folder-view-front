@@ -43,7 +43,7 @@ const FolderNode = ({
           </span>
         </div>
       </div>
-
+      {/* 
       {folderData.isOpen && folderData?.child.length > 0 && (
         <div style={{ marginLeft: "20px" }}>
           {folderData?.child.map((childNode, index) => (
@@ -55,7 +55,24 @@ const FolderNode = ({
             />
           ))}
         </div>
-      )}
+      )} */}
+      {folderData.isOpen &&
+        (folderData?.child.length > 0 ? (
+          <div style={{ marginLeft: "20px" }}>
+            {folderData?.child.map((childNode, index) => (
+              <FolderNode
+                key={index}
+                folderData={childNode}
+                folderOpenIconHandler={folderOpenIconHandler}
+                folderCreateCloseHandler={folderCreateCloseHandler}
+              />
+            ))}
+          </div>
+        ) : (
+          <div style={{ marginLeft: "20px" }} className="childRoots">
+            <p style={{ fontSize: "10px", opacity: ".5" }}>Empty</p>
+          </div>
+        ))}
     </>
   );
 };

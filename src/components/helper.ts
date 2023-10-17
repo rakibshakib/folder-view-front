@@ -59,7 +59,7 @@ export const toggleFolder = (
       if (child.isOpen && child.child.length > 0) {
         closeNextAllChildNode(child);
       } else {
-        child.isOpen = true;
+        child.isOpen = !child.isOpen;
       }
     } else if (child.child) {
       child.child.forEach(updateNodeToggle);

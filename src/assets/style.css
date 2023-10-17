@@ -1,9 +1,9 @@
-.container{
+.container {
     width: 400px;
-    border: 1px solid rgb(42, 42, 42);
-    padding: 5px 10px;
-    height: 100vh;
+    padding: 5px;
+    border-left: 1px solid rgb(242, 242, 242);
 }
+
 .parentRoot,
 .childRoots,
 .iconContainer {
@@ -14,9 +14,11 @@
     height: 25px;
     padding: 3px 5px;
 }
-.iconContainer span:first-child{
+
+.iconContainer span:first-child {
     margin-right: 10px;
 }
+
 .innrerContainer {
     display: flex;
     align-items: center;
@@ -25,34 +27,37 @@
     padding: 3px 0;
 }
 
-.parentRoot h4 ,
-.childRoots h4, p {
+.parentRoot h4,
+.childRoots h4,
+p {
     font-size: 14px;
     margin-left: 10px;
 }
 
-.childRoots:hover{
+.childRoots:hover {
     background-color: rgb(236, 236, 236);
     outline: 1px solid rgb(247, 247, 247);
+    border-radius: 0 0 10px 0;
 }
-.parentRoot{
-    /* position: absolute; */
+
+.parentRoot {
     background-color: white;
     width: 200px;
 }
-.childRoots{
-    /* position: relative; */
+
+.childRoots {
     top: 30px;
     left: 28px;
     width: 200px;
-    visibility: visible; /* Initial visibility state */
+    visibility: visible;
     background-color: rgb(250, 250, 250);
     outline: 1px solid rgb(247, 247, 247);
-    /* translate: all 0.5s ease-in-out; */
-    transition: transform 2s ease-in-out;
+    transition: transform 10s ease;
+    border-radius: 0 0 10px 0;
     z-index: -1;
 }
-.hide{
+
+.hide {
     visibility: hidden;
     transform: translateY(-100%);
 }
