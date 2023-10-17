@@ -33,6 +33,7 @@ function App() {
   return (
     <>
       <div className="main">
+        <p>Folder structure</p>
         <div className="container">
           <FolderNode
             folderData={folderData}
@@ -69,8 +70,15 @@ function App() {
           {isCloseModalOpen && (
             <ViewModal
               OnOk={() => {
-                console.log(currentFolder);
-                deleteFolder((currentFolder as TreeNode).id, folderData, setFolderData);
+                deleteFolder(
+                  (currentFolder as TreeNode).id,
+                  folderData,
+                  setFolderData,
+                  () => {
+                    setCurrentFolder({});
+                    setIsCloseOpenModal(!isCloseModalOpen);
+                  }
+                );
               }}
               onCancel={() => {
                 setCurrentFolder({});

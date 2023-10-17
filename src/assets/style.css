@@ -113,8 +113,9 @@ p {
 .modal-close-icon{
     display: flex;
     justify-content: flex-end;
-    cursor: pointer;
+
 }
 .modal-close-icon span:hover{
     color: red;
+    cursor: pointer;
 }

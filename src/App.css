@@ -10,3 +10,13 @@
   background-image: linear-gradient(to bottom right, #305170, #6DFC6B);
   height: 100vh;
 }
+.main > p{
+  color: white;
+  font-size: 16px;
+  border-bottom: 1px solid whitesmoke;
+  text-align: center;
+  width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  font-weight: 700;
+}
