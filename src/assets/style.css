@@ -2,6 +2,7 @@
     width: 400px;
     padding: 5px;
     border-left: 1px solid rgb(212, 212, 212);
+    margin-left: 15px;
 }
 
 .parentRoot,
@@ -60,4 +61,60 @@ p {
 .hide {
     visibility: hidden;
     transform: translateY(-100%);
+}
+
+/* modal css ---------------------- */
+.modal-container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.5s;
+    /* position: fixed; */
+}
+.modal-container.open{
+    display: flex;
+    opacity: 1;
+    /* position: fixed; */
+}
+.modal-inner{
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    min-width: 500px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    /* position: fixed; */
+}
+.modal-action-footer{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin-top: 10px;
+}
+.modal-action-footer button:nth-child(1){
+    margin-right: 10px;
+}
+.modal-action-footer button:nth-child(2){
+    background-image: linear-gradient(to bottom right, #58d756, #2a3e51);
+    color: white;
+
+}
+.modal-action-footer button{
+    padding: 5px 20px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+.modal-close-icon{
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+}
+.modal-close-icon span:hover{
+    color: red;
 }

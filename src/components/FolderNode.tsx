@@ -11,7 +11,6 @@ const FolderNode = ({
   folderOpenIconHandler: (node: TreeNode) => void;
   folderCreateCloseHandler: (node: TreeNode, type: string) => void;
 }) => {
-  console.log({ folderData });
   return (
     <>
       <div
