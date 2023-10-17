@@ -38,7 +38,14 @@ export const FolderDataSet: TreeNode = {
               name: "Folder 2.2.1",
               isOpen: false,
               id: 7,
-              child: [],
+              child: [
+                {
+                  name: "Folder 2.2.1.1",
+                  isOpen: false,
+                  id: 8,
+                  child: [],
+                },
+              ],
             },
           ],
         },
