@@ -17,7 +17,7 @@ const ViewModal = ({
   okText?: string;
   cancelText?: string;
   isOpen: boolean;
-}) => {
+}): JSX.Element => {
   return (
     <div className={`modal-container ${isOpen ? "open" : ""}`}>
       <div className="modal-inner">

@@ -74,7 +74,8 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
-    transition: opacity 0.5s;
+    /* transition: opacity 0.5s; */
+    transition: opacity 0.5s ease;
     /* position: fixed; */
 }
 .modal-container.open{
@@ -85,7 +86,7 @@
 .modal-inner{
     background-color: white;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 10px;
     min-width: 500px;
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
     /* position: fixed; */
@@ -113,7 +114,7 @@
 .modal-close-icon{
     display: flex;
     justify-content: flex-end;
-
+    font-size: 20px;
 }
 .modal-close-icon span:hover{
     color: red;
