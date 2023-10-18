@@ -119,12 +119,17 @@
     color: red;
     cursor: pointer;
 }
-.modal .inputField{
+.modal form{
+    width: 30vw;
+    display: block;
+}
+.modal form .inputField{
     padding: 10px;
     border-radius: 5px;
     border: 1px solid gray;
     margin: 5px 0px;
     outline: none;
+    min-width: 30vw;
 }
 .create-folder-container{
     display: flex;

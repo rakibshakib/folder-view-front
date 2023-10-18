@@ -36,6 +36,20 @@ function App() {
       setIsCloseOpenModal(!isCloseModalOpen);
     }
   };
+  const handleAddFolder = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    AddFolder(
+      (currentFolder as TreeNode).id,
+      folderName,
+      folderData,
+      setFolderData,
+      () => {
+        setCurrentFolder({});
+        setFolderName("");
+        setIsCreateOpenModal(!isCreateModalOpen);
+      }
+    );
+  };
   return (
     <>
       <div className="main">
@@ -65,6 +79,7 @@ function App() {
               }}
               onCancel={() => {
                 setCurrentFolder({});
+                setFolderName("");
                 setIsCreateOpenModal(!isCreateModalOpen);
               }}
               onclose={() => setIsCreateOpenModal(!isCreateModalOpen)}
@@ -76,12 +91,14 @@ function App() {
                 <p>
                   Create New Folder in <b>{(currentFolder as TreeNode).name}</b>{" "}
                 </p>
-                <input
-                  type="text"
-                  value={folderName}
-                  className="inputField"
-                  onChange={(e) => setFolderName(e.target.value)}
-                />
+                <form onSubmit={handleAddFolder}>
+                  <input
+                    type="text"
+                    value={folderName}
+                    className="inputField"
+                    onChange={(e) => setFolderName(e.target.value)}
+                  />
+                </form>
               </div>
             </ViewModal>
           )}

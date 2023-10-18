@@ -59,10 +59,10 @@ export const toggleFolder = (
   folderData: TreeNode,
   setFolderData: (node: TreeNode) => void
 ) => {
-  // ** Recursive function to search for the node
+  // Recursive function to search for the node
   const updateNodeToggle = (child: TreeNode) => {
     if (child.id === id) {
-      // ** close all child node if parent node is toggle for close
+      // close all child node if parent node is toggle for close
       if (child.isOpen && child.child.length > 0) {
         closeNextAllChildNode(child);
       } else {
@@ -102,7 +102,8 @@ export const deleteFolder = (
   updateNode(updatedData);
   setFolderData(updatedData);
   cb?.();
-};
+}
+
 export const AddFolder = (
   id: number,
   folderName: string,
@@ -114,22 +115,22 @@ export const AddFolder = (
     name: folderName,
     isOpen: false,
     id: Date.now(),
-    child: [],
+    child: [] as TreeNode[],
   };
-  if (folderData.name === "Root") {
-    folderData.child.push(newObject);
+  
+  if (folderData.name === "Root" && folderData.id === id) {
+    (folderData.child as TreeNode[]).push(newObject);
   } else {
     const updateNode = (child: TreeNode) => {
       const index = child?.child.findIndex((i) => i.id === id);
       if (index === -1) {
         child.child.forEach(updateNode);
       } else {
-        child?.child[index].child.push(newObject);
+        (child?.child[index].child as TreeNode[]).push(newObject);
       }
     };
     const updatedData = { ...folderData };
     updateNode(updatedData);
-    console.log(updatedData);
     setFolderData(updatedData);
   }
   cb?.();
