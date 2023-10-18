@@ -59,10 +59,8 @@ export const toggleFolder = (
   folderData: TreeNode,
   setFolderData: (node: TreeNode) => void
 ) => {
-  // Recursive function to search for the node
   const updateNodeToggle = (child: TreeNode) => {
     if (child.id === id) {
-      // close all child node if parent node is toggle for close
       if (child.isOpen && child.child.length > 0) {
         closeNextAllChildNode(child);
       } else {
