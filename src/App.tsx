@@ -51,26 +51,29 @@ function App() {
   };
 
   const addNewFolderAsChild = () => {
-    AddFolder(
-      (currentFolder as TreeNode).id,
-      folderName,
-      folderData as TreeNode,
-      setFolderData,
-      () => {
-        addChildFolder({
-          url: "updateNodeFolder",
-          method: "post",
-          payload: {
-            id: (currentFolder as TreeNode).id,
-            name: folderName,
-          },
-          // cb: () => getAllFolder(),
-        });
-        setCurrentFolder({});
-        setFolderName("");
-        setIsCreateOpenModal(!isCreateModalOpen);
-      }
-    );
+    addChildFolder({
+      url: "updateNodeFolder",
+      method: "post",
+      payload: {
+        id: (currentFolder as TreeNode).id,
+        name: folderName,
+      },
+      cb: (res) => {
+        const newFolderId = res?.id;
+        AddFolder(
+          (currentFolder as TreeNode).id,
+          folderName,
+          newFolderId as string,
+          folderData as TreeNode,
+          setFolderData,
+          () => {
+            setCurrentFolder({});
+            setFolderName("");
+            setIsCreateOpenModal(!isCreateModalOpen);
+          }
+        );
+      },
+    });
   };
   const handleAddFolder = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

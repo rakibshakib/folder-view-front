@@ -100,11 +100,12 @@ export const deleteFolder = (
   updateNode(updatedData);
   setFolderData(updatedData);
   cb?.();
-}
+};
 
 export const AddFolder = (
   id: string,
   folderName: string,
+  newFolderId: string,
   folderData: TreeNode,
   setFolderData: (node: TreeNode) => void,
   cb: () => void
@@ -112,10 +113,10 @@ export const AddFolder = (
   const newObject: TreeNode = {
     name: folderName,
     isOpen: false,
-    id: Date.now() + "",
+    id: newFolderId,
     child: [] as TreeNode[],
   };
-  
+
   if (folderData.name === "Root" && folderData.id === id) {
     (folderData.child as TreeNode[]).push(newObject);
   } else {
