@@ -18,8 +18,8 @@ Axios.defaults.baseURL = APIUrl;
 function App() {
   const [folderData, getFolderData, isLoading, setFolderData] =
     useCallApi<TreeNode>();
-  const [, deleteFolderApi, isDeleting] = useCallApi<null>();
-  const [, addChildFolder, isAdding] = useCallApi<null>();
+  const [, deleteFolderApi] = useCallApi<null>();
+  const [, addChildFolder] = useCallApi<null>();
   const [folderName, setFolderName] = useState<string>("");
   const [isCreateModalOpen, setIsCreateOpenModal] = useState<boolean>(false);
   const [isCloseModalOpen, setIsCloseOpenModal] = useState<boolean>(false);
@@ -33,6 +33,7 @@ function App() {
 
   useEffect(() => {
     getAllFolder();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const folderOpenIconHandler = (FolderNode: TreeNode): void => {
@@ -79,6 +80,14 @@ function App() {
     e.preventDefault();
     addNewFolderAsChild();
   };
+
+  if (isLoading) {
+    return (
+      <div className="main">
+        <p>Folder structure</p>
+      </div>
+    );
+  }
   return (
     <>
       <div className="main">

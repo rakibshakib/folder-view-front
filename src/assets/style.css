@@ -130,7 +130,7 @@
     border: 1px solid gray;
     margin: 5px 0px;
     outline: none;
-    min-width: 30vw;
+    min-width: 27vw;
 }
 .create-folder-container{
     display: flex;
