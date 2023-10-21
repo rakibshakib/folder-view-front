@@ -3,17 +3,17 @@ import { TreeNode } from "../App";
 export const FolderDataSet: TreeNode = {
   name: "Root",
   isOpen: false,
-  id: 1,
+  id: "1",
   child: [
     {
       name: "Folder 1",
       isOpen: false,
-      id: 2,
+      id: "2",
       child: [
         {
           name: "Folder 1.1",
           isOpen: false,
-          id: 4,
+          id: "4",
           child: [],
         },
       ],
@@ -21,28 +21,28 @@ export const FolderDataSet: TreeNode = {
     {
       name: "Folder 2",
       isOpen: false,
-      id: 3,
+      id: "3",
       child: [
         {
           name: "Folder 2.1",
           isOpen: false,
-          id: 5,
+          id: "5",
           child: [],
         },
         {
           name: "Folder 2.2",
           isOpen: false,
-          id: 6,
+          id: "6",
           child: [
             {
               name: "Folder 2.2.1",
               isOpen: false,
-              id: 7,
+              id: "7",
               child: [
                 {
                   name: "Folder 2.2.1.1",
                   isOpen: false,
-                  id: 8,
+                  id: "8",
                   child: [],
                 },
               ],
@@ -55,7 +55,7 @@ export const FolderDataSet: TreeNode = {
 };
 
 export const toggleFolder = (
-  id: number,
+  id: string,
   folderData: TreeNode,
   setFolderData: (node: TreeNode) => void
 ) => {
@@ -83,7 +83,7 @@ const closeNextAllChildNode = (child: TreeNode): void => {
 };
 
 export const deleteFolder = (
-  id: number,
+  id: string,
   folderData: TreeNode,
   setFolderData: (node: TreeNode) => void,
   cb: () => void
@@ -103,7 +103,7 @@ export const deleteFolder = (
 }
 
 export const AddFolder = (
-  id: number,
+  id: string,
   folderName: string,
   folderData: TreeNode,
   setFolderData: (node: TreeNode) => void,
@@ -112,7 +112,7 @@ export const AddFolder = (
   const newObject: TreeNode = {
     name: folderName,
     isOpen: false,
-    id: Date.now(),
+    id: Date.now() + "",
     child: [] as TreeNode[],
   };
   

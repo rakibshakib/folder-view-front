@@ -22,7 +22,7 @@ const FolderNode = ({
           <h4>{folderData?.name}</h4>
         </div>
         <div className="iconContainer">
-          {folderData.id > 1 && (
+          {folderData.id !== "653179d87dae277fc80a74a6" && (
             <span
               onClick={(e) => {
                 e.stopPropagation();

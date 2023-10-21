@@ -1,29 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
-import {
-  AddFolder,
-  FolderDataSet,
-  deleteFolder,
-  toggleFolder,
-} from "./components/helper";
+import { AddFolder, deleteFolder, toggleFolder } from "./components/helper";
 import FolderNode from "./components/FolderNode";
 import ViewModal from "./components/Modal";
+import useCallApi from "./hooks/useCallApi";
+import Axios from "axios";
 
 export interface TreeNode {
   name: string;
   isOpen: boolean;
-  id: number;
+  id: string;
   child: TreeNode[] | [];
 }
+const APIUrl: string = "http://localhost:5000";
+Axios.defaults.baseURL = APIUrl;
 
 function App() {
-  const [folderData, setFolderData] = useState<TreeNode>({ ...FolderDataSet });
+  const [folderData, getFolderData, isLoading, setFolderData] =
+    useCallApi<TreeNode>();
+  const [, deleteFolderApi, isDeleting] = useCallApi<null>();
+  const [, addChildFolder, isAdding] = useCallApi<null>();
   const [folderName, setFolderName] = useState<string>("");
   const [isCreateModalOpen, setIsCreateOpenModal] = useState<boolean>(false);
   const [isCloseModalOpen, setIsCloseOpenModal] = useState<boolean>(false);
   const [currentFolder, setCurrentFolder] = useState<TreeNode | object>();
+
+  const getAllFolder = (): void => {
+    getFolderData({
+      url: "allFolders",
+    });
+  };
+
+  useEffect(() => {
+    getAllFolder();
+  }, []);
+
   const folderOpenIconHandler = (FolderNode: TreeNode): void => {
-    toggleFolder(FolderNode?.id, folderData, setFolderData);
+    toggleFolder(FolderNode?.id, folderData as TreeNode, setFolderData);
   };
   const folderCreateCloseHandler = (
     FolderNode: TreeNode,
@@ -36,19 +49,32 @@ function App() {
       setIsCloseOpenModal(!isCloseModalOpen);
     }
   };
-  const handleAddFolder = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const addNewFolderAsChild = () => {
     AddFolder(
       (currentFolder as TreeNode).id,
       folderName,
-      folderData,
+      folderData as TreeNode,
       setFolderData,
       () => {
+        addChildFolder({
+          url: "updateNodeFolder",
+          method: "post",
+          payload: {
+            id: (currentFolder as TreeNode).id,
+            name: folderName,
+          },
+          // cb: () => getAllFolder(),
+        });
         setCurrentFolder({});
         setFolderName("");
         setIsCreateOpenModal(!isCreateModalOpen);
       }
     );
+  };
+  const handleAddFolder = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    addNewFolderAsChild();
   };
   return (
     <>
@@ -56,7 +82,7 @@ function App() {
         <p>Folder structure</p>
         <div className="container">
           <FolderNode
-            folderData={folderData}
+            folderData={folderData as TreeNode}
             folderOpenIconHandler={folderOpenIconHandler}
             folderCreateCloseHandler={folderCreateCloseHandler}
           />
@@ -65,17 +91,7 @@ function App() {
           {isCreateModalOpen && (
             <ViewModal
               OnOk={() => {
-                AddFolder(
-                  (currentFolder as TreeNode).id,
-                  folderName,
-                  folderData,
-                  setFolderData,
-                  () => {
-                    setCurrentFolder({});
-                    setFolderName("");
-                    setIsCreateOpenModal(!isCreateModalOpen);
-                  }
-                );
+                addNewFolderAsChild();
               }}
               onCancel={() => {
                 setCurrentFolder({});
@@ -109,9 +125,16 @@ function App() {
               OnOk={() => {
                 deleteFolder(
                   (currentFolder as TreeNode).id,
-                  folderData,
+                  folderData as TreeNode,
                   setFolderData,
                   () => {
+                    deleteFolderApi({
+                      url: "deleteNodeById",
+                      method: "post",
+                      payload: {
+                        id: (currentFolder as TreeNode).id,
+                      },
+                    });
                     setCurrentFolder({});
                     setIsCloseOpenModal(!isCloseModalOpen);
                   }
