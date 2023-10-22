@@ -16,6 +16,6 @@ Backend APIs List:
 ### The root folder can not be deleted. 
 
 Technologies Used: 
-- Node.js , Express.js, Mongoose, MongoDB, Typescirpt, Javascript
-- Typescirpt, React.js, Axios, React-icons, css
+- Node.js , Express.js, Mongoose, MongoDB, Typescript, Javascript
+- Typescript, React.js, Axios, React-icons, css
 - git, github, netlify, render, 
