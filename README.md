@@ -1,27 +1,21 @@
-# React + TypeScript + Vite
+## api server: https://folder-structure-api-g4oe.onrender.com
+## front server: https://tree-folder-view.netlify.app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Features: 
+A simple Folder structure viewer. 
 
-Currently, two official plugins are available:
+A tree view of the folders should be accomplished in your front end with the ability to Create and delete folders.
+No user authentication.
+The folder structure saved in the backend in a database.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Backend APIs List:
+- get All Folder "/allFolders"
+- Create a folder "/updateNodeFolder"
+- Delete a folder "/deleteNodeById"
 
-## Expanding the ESLint configuration
+### The root folder can not be deleted. 
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Technologies Used: 
+- Node.js , Express.js, Mongoose, MongoDB, Typescirpt, Javascript
+- Typescirpt, React.js, Axios, React-icons, css
+- git, github, netlify, render, 
